@@ -1,0 +1,16 @@
+.grid-container {
+  background-color: #211c1c;
+  display: grid;
+  overflow: hidden;
+  grid-template-columns: auto 1fr;
+  grid-template-rows: auto 1fr;
+
+  .aside {
+    grid-row: 1 / 3;
+  }
+
+  .title {
+    display: inline-grid;
+    justify-content: center;
+  }
+}

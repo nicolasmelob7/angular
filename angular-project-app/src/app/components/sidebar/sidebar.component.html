@@ -1,0 +1,46 @@
+<nav class="sidebar" [ngClass]="{ 'sidebar-collapsed': isSidebarCollapsed() }">
+  <section class="sidebar-header">
+    <a href="#" class="sidebar-logo">
+      <img src="../../../assets/images/icon.png" />
+    </a>
+  </section>
+
+  <section class="sidebar-menu">
+    <ul>
+      <ng-container *ngFor="let item of menuItems">
+        <li class="sidebar-menu-item">
+          <a
+            href="#"
+            class="sidebar-item"
+            [ngClass]="{
+              'has-children': item.children,
+              'menu-item-active': item.isOpen,
+            }"
+            (click)="toggleMenuItem(item)"
+          >
+            <fa-icon [icon]="item.icon"></fa-icon>
+            <span class="sidebar-item-text">{{ item.label }}</span>
+            <fa-icon
+              [icon]="faChevronDown()"
+              *ngIf="item.children && !isSidebarCollapsed()"
+              class="sidebar-item-arrow"
+              [ngClass]="{ rotated: item.isOpen }"
+            >
+            </fa-icon>
+          </a>
+          <ul
+            *ngIf="item.children && !isSidebarCollapsed() && item.isOpen"
+            class="sidebar-submenu"
+          >
+            <li *ngFor="let child of item.children">
+              <a href="#" class="sidebar-item sidebar-subitem">
+                <fa-icon [icon]="child.icon"></fa-icon>
+                <span class="sidebar-item-text">{{ child.label }}</span>
+              </a>
+            </li>
+          </ul>
+        </li>
+      </ng-container>
+    </ul>
+  </section>
+</nav>
