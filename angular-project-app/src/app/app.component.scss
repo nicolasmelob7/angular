@@ -1,0 +1,60 @@
+@use "./../variables" as vars;
+
+$grid-temp-column-1: 15%;
+$grid-temp-row-1: 25dvh;
+$grid-temp-margin-screen: 5dvh;
+
+$grid-temp-column-2: calc(100% - $grid-temp-column-1);
+$grid-temp-row-2: calc(100dvh - $grid-temp-row-1);
+$grid-temp-height-screen: calc($grid-temp-row-2 - 2 * $grid-temp-margin-screen);
+
+.grid-container {
+  background-color: vars.$bg-st-color;
+  display: grid;
+  grid-template-columns: $grid-temp-column-1 $grid-temp-column-2;
+  grid-template-rows: $grid-temp-row-1 $grid-temp-row-2;
+
+  grid-template-areas:
+    "aside header"
+    "aside main";
+
+  header {
+    grid-area: header;
+    display: inline-grid;
+    justify-content: center;
+    img {
+      width: 100%;
+      height: $grid-temp-row-1;
+    }
+  }
+
+  aside {
+    grid-area: aside;
+  }
+
+  main {
+    grid-area: main;
+    align-content: center;
+
+    ::ng-deep app-home-screen {
+      display: grid;
+      height: $grid-temp-height-screen;
+      margin: $grid-temp-margin-screen;
+    }
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .grid-container {
+    grid-template-columns: 1fr;
+    grid-template-rows: auto auto;
+    grid-template-areas:
+      "aside"
+      "header"
+      "main";
+  }
+
+  aside {
+    flex-direction: row;
+  }
+}

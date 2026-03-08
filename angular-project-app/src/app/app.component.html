@@ -1,10 +1,12 @@
 <div class="grid-container">
-  <app-sidebar [isSidebarCollapsed]="isSidebarCollapsed()" class="aside">
-  </app-sidebar>
-
-  <section class="title">
+  <header>
     <img src="../assets/images/stranger-algorithms.png" />
-  </section>
+  </header>
+  <aside>
+    <app-sidebar [isSidebarCollapsed]="isSidebarCollapsed()"> </app-sidebar>
+  </aside>
 
-  <main class="main">asdasdas</main>
+  <main>
+    <router-outlet></router-outlet>
+  </main>
 </div>

@@ -1,0 +1,20 @@
+@use "./../../../../variables" as vars;
+
+p {
+  border-right: solid 0.1rem;
+  color: vars.$font-st-color;
+  border-right-color: vars.$font-st-color;
+  font-size: 11dvmin;
+  font-weight: bold;
+  font-family: "Movie Bill", "Aachen Bold", "Rockwell Extra Bold", serif;
+  padding-right: 1rem;
+  animation-name: blinking;
+  animation-duration: 0.9s;
+  animation-iteration-count: infinite;
+
+  @keyframes blinking {
+    50% {
+      border-right-color: transparent;
+    }
+  }
+}

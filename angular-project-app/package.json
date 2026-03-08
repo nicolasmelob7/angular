@@ -22,7 +22,9 @@
     "@fortawesome/fontawesome-svg-core": "^6.4.2",
     "@fortawesome/free-solid-svg-icons": "^6.4.2",
     "bootstrap": "^5.3.8",
+    "ngx-simple-typewriter": "^0.0.6",
     "rxjs": "~7.8.0",
+    "t-writer.js": "^1.0.4",
     "tslib": "^2.3.0",
     "zone.js": "~0.14.3"
   },
