@@ -6,18 +6,20 @@ import {
   faCoffee,
   IconDefinition,
 } from '@fortawesome/free-solid-svg-icons';
+import { RouterLink, RouterLinkActive } from '@angular/router';
 
 interface MenuItem {
   icon: IconDefinition;
   label: string;
-  children?: MenuItem[];
   isOpen?: boolean;
+  routerLink?: string[];
+  children?: MenuItem[];
 }
 
 @Component({
   selector: 'app-sidebar',
   standalone: true,
-  imports: [CommonModule, FaIconComponent],
+  imports: [CommonModule, FaIconComponent, RouterLink, RouterLinkActive],
   templateUrl: './sidebar.component.html',
   styleUrls: ['./sidebar.component.scss'],
 })
@@ -25,14 +27,24 @@ export class SidebarComponent {
   isSidebarCollapsed = input.required<boolean>();
   faChevronDown = signal(faChevronDown).asReadonly();
 
-  menuItems = [
+  menuItems = <MenuItem[]>[
     {
       icon: faCoffee,
-      label: 'Dashboard',
+      label: 'Home',
+      routerLink: ['/'],
+    },
+    {
+      icon: faCoffee,
+      label: 'Courses',
       isOpen: false,
       children: [
-        { icon: faCoffee, label: 'Analytics' },
-        { icon: faCoffee, label: 'Projects' },
+        { icon: faCoffee, label: 'Add', routerLink: ['/courses/add'] },
+        { icon: faCoffee, label: 'Edit', routerLink: ['/courses/edit'] },
+        {
+          icon: faCoffee,
+          label: 'Simulate',
+          routerLink: ['/courses/simulate'],
+        },
       ],
     },
     {

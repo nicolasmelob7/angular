@@ -21,7 +21,7 @@ export class TypewriterComponent implements AfterViewInit {
   sleepBetweenPhrases = input<number>(2000);
   sleepBetweenLoop = input<number>(1500);
 
-  value = viewChild.required<ElementRef<HTMLParagraphElement>>('value');
+  value = viewChild.required<ElementRef<HTMLSpanElement>>('value');
 
   async ngAfterViewInit() {
     setTimeout(() => {

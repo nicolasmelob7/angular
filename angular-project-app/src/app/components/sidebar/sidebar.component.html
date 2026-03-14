@@ -8,7 +8,8 @@
       <ng-container *ngFor="let item of menuItems">
         <li class="sidebar-menu-item">
           <a
-            href="#"
+            [routerLink]="item.routerLink"
+            routerLinkActive="selected"
             class="sidebar-item"
             [ngClass]="{
               'has-children': item.children,
@@ -31,7 +32,11 @@
             class="sidebar-submenu"
           >
             <li *ngFor="let child of item.children">
-              <a href="#" class="sidebar-item sidebar-subitem">
+              <a
+                class="sidebar-item sidebar-subitem"
+                [routerLink]="child.routerLink"
+                routerLinkActive="selected"
+              >
                 <fa-icon [icon]="child.icon"></fa-icon>
                 <span class="sidebar-item-text">{{ child.label }}</span>
               </a>

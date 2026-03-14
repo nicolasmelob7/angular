@@ -20,11 +20,9 @@ $grid-temp-height-screen: calc($grid-temp-row-2 - 2 * $grid-temp-margin-screen);
 
   header {
     grid-area: header;
-    display: inline-grid;
     justify-content: center;
     img {
       width: 100%;
-      height: $grid-temp-row-1;
     }
   }
 
@@ -34,12 +32,18 @@ $grid-temp-height-screen: calc($grid-temp-row-2 - 2 * $grid-temp-margin-screen);
 
   main {
     grid-area: main;
-    align-content: center;
 
     ::ng-deep app-home-screen {
       display: grid;
+
       height: $grid-temp-height-screen;
       margin: $grid-temp-margin-screen;
+    }
+
+    ::ng-deep app-add-course {
+      display: grid;
+      margin: 0% 10%;
+      margin-top: 5%;
     }
   }
 }

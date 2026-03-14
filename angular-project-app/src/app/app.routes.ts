@@ -1,6 +1,8 @@
 import { Routes } from '@angular/router';
-import { ScheduleCoursesComponent } from '@components/courses/schedule/schedule.component';
 import { HomeScreenComponent } from '@app/components/home-screen/home-screen.component';
+import { SimulateCoursesComponent } from '@app/components/courses/simulate/simulate.component';
+import { EditCoursesComponent } from '@app/components/courses/edit/edit.component';
+import { AddCourseComponent } from '@app/components/courses/add/add.component';
 
 export const routes: Routes = [
   {
@@ -8,7 +10,15 @@ export const routes: Routes = [
     component: HomeScreenComponent,
   },
   {
-    path: 'schedule-courses',
-    component: ScheduleCoursesComponent,
+    path: 'courses/simulate',
+    component: SimulateCoursesComponent,
+  },
+  {
+    path: 'courses/edit',
+    component: EditCoursesComponent,
+  },
+  {
+    path: 'courses/add',
+    component: AddCourseComponent,
   },
 ];
