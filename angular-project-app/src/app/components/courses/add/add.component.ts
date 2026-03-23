@@ -9,6 +9,7 @@ import { DateInput } from '@src/app/shared/components/input/date-input/date-inpu
 import { TimeInput } from '@src/app/shared/components/input/time-input/time-input';
 import { Router } from '@angular/router';
 import { minDateTime } from '@src/app/shared/validators/min-date-time/min-date-time.validator';
+import { pathRoutes } from '@src/app/app.routes';
 
 @Component({
   selector: 'app-add-course',
@@ -26,6 +27,7 @@ export class AddCourseComponent {
   courseModel = signal<Course>({
     id: '',
     title: '',
+    description: '',
     teacher: '',
     date: null,
     startTime: null,
@@ -58,7 +60,7 @@ export class AddCourseComponent {
 
       this.coursesService.addCourse(newCourse);
 
-      this.router.navigate(['/']);
+      this.router.navigate([pathRoutes.homeScreen]);
     });
   }
 }

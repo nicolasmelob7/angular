@@ -1,6 +1,9 @@
 import { Component, input, model, ViewEncapsulation } from '@angular/core';
 import { FieldState, FieldTree, FormField } from '@angular/forms/signals';
-import { MatFormFieldModule } from '@angular/material/form-field';
+import {
+  MatFormFieldAppearance,
+  MatFormFieldModule,
+} from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 
 @Component({
@@ -11,7 +14,7 @@ import { MatInputModule } from '@angular/material/input';
 })
 export class MyInput {
   id = input<string>(Date().toLocaleString());
-  name = input.required<string>();
+  name = input<string>();
   type = input<string>('text');
   model = input.required<FieldTree<string | number | boolean | Date | null>>();
   labelInput = input<string>('');

@@ -16,6 +16,7 @@ export class CoursesService {
   addCourse(courseData: {
     title: string;
     teacher: string;
+    description: string;
     date: Date | null;
     startTime: Date | null;
     endTime: Date | null;

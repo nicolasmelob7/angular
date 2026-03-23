@@ -7,6 +7,7 @@ import {
   IconDefinition,
 } from '@fortawesome/free-solid-svg-icons';
 import { RouterLink, RouterLinkActive } from '@angular/router';
+import { pathRoutes } from '@src/app/app.routes';
 
 interface MenuItem {
   icon: IconDefinition;
@@ -31,19 +32,28 @@ export class SidebarComponent {
     {
       icon: faCoffee,
       label: 'Home',
-      routerLink: ['/'],
+      routerLink: [pathRoutes.homeScreen],
     },
     {
       icon: faCoffee,
       label: 'Courses',
       isOpen: false,
       children: [
-        { icon: faCoffee, label: 'Add', routerLink: ['/courses/add'] },
-        { icon: faCoffee, label: 'Edit', routerLink: ['/courses/edit'] },
+        {
+          icon: faCoffee,
+          label: 'List',
+          routerLink: [pathRoutes.courses.list],
+        },
+        { icon: faCoffee, label: 'Add', routerLink: [pathRoutes.courses.add] },
+        {
+          icon: faCoffee,
+          label: 'Edit',
+          routerLink: [pathRoutes.courses.edit],
+        },
         {
           icon: faCoffee,
           label: 'Simulate',
-          routerLink: ['/courses/simulate'],
+          routerLink: [pathRoutes.courses.simulate],
         },
       ],
     },

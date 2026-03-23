@@ -1,36 +1,5 @@
-::-webkit-scrollbar {
-  width: 0.3rem;
-}
-
-/* Track */
-::-webkit-scrollbar-track {
-  background: #f1f1f1;
-}
-
-/* Handle */
-::-webkit-scrollbar-thumb {
-  background: #3a3a3a;
-}
-
-/* Handle on hover */
-::-webkit-scrollbar-thumb:hover {
-  background: #1c1c1c;
-}
-
 .sidebar {
   color: #ecf0f1;
-  height: 100dvh;
-  overflow-y: auto;
-  transition: all 0.3s ease-in-out;
-  border-right: solid rgba(255, 255, 255, 0.2) 0.1rem;
-  background-image: linear-gradient(
-    to right top,
-    #000000,
-    #090808,
-    #110f0f,
-    #171515,
-    #1c1919
-  );
 }
 
 .sidebar-header {

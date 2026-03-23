@@ -1,33 +1,33 @@
 import { SchemaPath, validate } from '@angular/forms/signals';
 import { isDate, isNull } from '../../common/common';
 
-export function minDateTime(
+export function maxDateTime(
   field: SchemaPath<Date | null>,
   minDateTime: SchemaPath<Date | null>,
   options?: { message?: string },
 ): void;
 
-export function minDateTime(
+export function maxDateTime(
   field: SchemaPath<Date | null>,
   minDateTime: Date | null,
   options?: { message?: string },
 ): void;
 
-export function minDateTime(
+export function maxDateTime(
   field: SchemaPath<Date | null>,
-  minDateTime: SchemaPath<Date | null> | Date | null,
+  maxDateTime: SchemaPath<Date | null> | Date | null,
   options?: { message?: string },
 ) {
   validate(field, ({ value, valueOf }) => {
     const dateTimeField = value() as Date;
-    const dateTimeMin = (
-      isDate(minDateTime) || isNull(minDateTime)
-        ? (minDateTime as Date)
-        : valueOf(minDateTime as SchemaPath<Date | null>)
+    const dateTimeMax = (
+      isDate(maxDateTime) || isNull(maxDateTime)
+        ? (maxDateTime as Date)
+        : valueOf(maxDateTime as SchemaPath<Date | null>)
     ) as Date;
-    if (dateTimeField < dateTimeMin)
+    if (dateTimeField > dateTimeMax)
       return {
-        kind: 'min-date-time',
+        kind: 'max-date-time',
         message: options?.message || 'Field is required',
       };
 

@@ -1,35 +1,62 @@
+<div name="form-title">
+  <p>Add a course</p>
+</div>
 <form (submit)="onSubmit($event)">
-  <h1 class="title">Add a course</h1>
-  <section class="grid-container-input-2-col">
-    <section class="column-1">
-      <my-input [name]="'Title'" [model]="courseForm.title"> </my-input>
-      <section class="grid-container-input-2-col start-end-time-group">
-        <section class="column-1">
-          <time-input [name]="'Start'" [model]="courseForm.startTime">
-          </time-input>
-        </section>
-        <section class="column-2">
-          <time-input
-            [name]="'End'"
-            [minTime]="courseForm.startTime().value()"
-            [model]="courseForm.endTime"
-          >
-          </time-input>
-        </section>
-      </section>
-    </section>
+  <h4>General informations</h4>
+  <section class="grid grid-cols-2 gap-4">
+    <my-input
+      [labelInput]="'Title'"
+      [model]="courseForm.title"
+      class="col-span-1"
+    >
+    </my-input>
 
-    <section class="column-2">
-      <my-input [name]="'Teacher'" [model]="courseForm.teacher"> </my-input>
-      <date-input [name]="'Date'" [minDate]="minDate" [model]="courseForm.date">
-      </date-input>
-    </section>
+    <my-input
+      [labelInput]="'Teacher'"
+      [model]="courseForm.teacher"
+      class="col-span-1"
+    >
+    </my-input>
+
+    <my-input
+      [labelInput]="'Description'"
+      [model]="courseForm.description"
+      class="col-span-2"
+    >
+    </my-input>
   </section>
 
-  <section class="grid-container-input-2-col">
-    <section class="column-1"></section>
-    <section class="column-2">
-      <button type="submit" class="button-submit" role="button">Add</button>
-    </section>
+  <h4>When will it happen?</h4>
+  <section class="grid grid-cols-2 gap-2">
+    <time-input
+      [labelInput]="'Start'"
+      [model]="courseForm.startTime"
+      class="col-span-1"
+    >
+    </time-input>
+    <time-input
+      [labelInput]="'End'"
+      [minTime]="courseForm.startTime().value()"
+      [model]="courseForm.endTime"
+      class="col-span-1"
+    >
+    </time-input>
+    <date-input
+      [labelInput]="'Date'"
+      [minDate]="minDate"
+      [model]="courseForm.date"
+      class="col-span-1"
+    >
+    </date-input>
+  </section>
+
+  <section class="grid grid-col-1">
+    <button
+      type="submit"
+      class="button-submit justify-self-end span-col-1"
+      role="button"
+    >
+      Add
+    </button>
   </section>
 </form>

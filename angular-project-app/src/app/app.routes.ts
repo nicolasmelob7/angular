@@ -4,21 +4,31 @@ import { SimulateCoursesComponent } from '@app/components/courses/simulate/simul
 import { EditCoursesComponent } from '@app/components/courses/edit/edit.component';
 import { AddCourseComponent } from '@app/components/courses/add/add.component';
 
+export const pathRoutes = {
+  homeScreen: '',
+  courses: {
+    list: 'courses/list',
+    add: 'courses/add',
+    edit: 'courses/edit',
+    simulate: 'courses/simulate',
+  },
+};
+
 export const routes: Routes = [
   {
-    path: '',
+    path: pathRoutes.homeScreen,
     component: HomeScreenComponent,
   },
   {
-    path: 'courses/simulate',
+    path: pathRoutes.courses.simulate,
     component: SimulateCoursesComponent,
   },
   {
-    path: 'courses/edit',
+    path: pathRoutes.courses.edit,
     component: EditCoursesComponent,
   },
   {
-    path: 'courses/add',
+    path: pathRoutes.courses.add,
     component: AddCourseComponent,
   },
 ];

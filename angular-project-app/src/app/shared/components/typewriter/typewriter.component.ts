@@ -5,8 +5,7 @@ import {
   input,
   viewChild,
 } from '@angular/core';
-
-const sleep = (ms: number) => new Promise((res) => setTimeout(res, ms));
+import { sleep } from '../../common/common';
 
 @Component({
   selector: 'app-typewriter',

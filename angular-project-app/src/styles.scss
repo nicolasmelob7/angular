@@ -1,5 +1,6 @@
 @use "@angular/material" as mat;
 @use "./variables" as vars;
+@use "tailwindcss";
 
 $font-size: 1.3rem;
 $font-family: serif;
@@ -15,7 +16,6 @@ html {
         tertiary: mat.$violet-palette,
       ),
       typography: Roboto,
-      density: 0,
     )
   );
 }
@@ -46,8 +46,31 @@ span {
   color: $font-color;
 }
 
-.title {
-  font-size: 3rem;
+div[name="form-title"] {
+  p {
+    font-size: 2.5rem;
+  }
+  display: inline-flex;
+}
+
+form {
+  margin-top: 1rem;
+}
+
+form > section {
+  margin-top: 1rem;
+}
+
+form > h1 {
+  font-family: $font-family;
+  font-weight: $font-weight;
+  color: #919191;
+  justify-self: center;
+}
+
+form > h3,
+form > h4 {
+  margin-top: 1rem;
   font-family: $font-family;
   font-weight: $font-weight;
   color: #919191;
@@ -59,43 +82,10 @@ ul {
   margin: 0;
 }
 
-.grid-container-input-2-col {
-  display: grid;
-  grid-template-columns: 50% 50%;
-  grid-template-areas: "column-1 column-2";
-
-  .column-1 {
-    width: 100%;
-    grid-area: column-1;
-  }
-
-  .column-2 {
-    width: 100%;
-    grid-area: column-2;
-  }
-
-  .column-1 div[name="div-input"] {
-    width: 50%;
-    display: grid;
-    justify-self: flex-start;
-    margin-bottom: 0.3rem;
-  }
-
-  .column-2 div[name="div-input"] {
-    width: 50%;
-    display: grid;
-    justify-self: flex-end;
-    margin-bottom: 0.3rem;
-  }
-
-  .column-2 button[type="submit"] {
-    display: grid;
-    justify-self: flex-end;
-  }
-}
-
 .button-submit {
+  width: 10%;
   margin-top: 0.5rem;
+  cursor: pointer;
   background: linear-gradient(to bottom right, vars.$font-st-color, #000);
   border: 0;
   border-radius: 12px;
