@@ -3,6 +3,6 @@ export interface Course {
   title: string;
   teacher: string;
   date: Date | null;
-  startTime: string;
-  endTime: string;
+  startTime: Date | null;
+  endTime: Date | null;
 }

@@ -1,35 +1,35 @@
-<form>
-  <section class="grid-container-input-2col container-input">
-    <section class="column1">
-      <div>
-        <p>Title</p>
-        <input type="text" [(ngModel)]="course().title" />
-      </div>
-      <div>
-        <p>Start</p>
-        <input type="text" [(ngModel)]="course().startTime" />
-      </div>
-      <div>
-        <p>End</p>
-        <input type="text" [(ngModel)]="course().endTime" />
-      </div>
+<form (submit)="onSubmit($event)">
+  <h1 class="title">Add a course</h1>
+  <section class="grid-container-input-2-col">
+    <section class="column-1">
+      <my-input [name]="'Title'" [model]="courseForm.title"> </my-input>
+      <section class="grid-container-input-2-col start-end-time-group">
+        <section class="column-1">
+          <time-input [name]="'Start'" [model]="courseForm.startTime">
+          </time-input>
+        </section>
+        <section class="column-2">
+          <time-input
+            [name]="'End'"
+            [minTime]="courseForm.startTime().value()"
+            [model]="courseForm.endTime"
+          >
+          </time-input>
+        </section>
+      </section>
     </section>
 
-    <section class="column2">
-      <div>
-        <p>Teacher</p>
-        <input type="text" [(ngModel)]="course().teacher" />
-      </div>
-      <div>
-        <p>Date</p>
-        <input type="text" [(ngModel)]="course().date" />
-      </div>
+    <section class="column-2">
+      <my-input [name]="'Teacher'" [model]="courseForm.teacher"> </my-input>
+      <date-input [name]="'Date'" [minDate]="minDate" [model]="courseForm.date">
+      </date-input>
     </section>
   </section>
 
-  <section class="grid-container-input-2col">
-    <div class="column2 button-submit">
-      <button role="button">Add</button>
-    </div>
+  <section class="grid-container-input-2-col">
+    <section class="column-1"></section>
+    <section class="column-2">
+      <button type="submit" class="button-submit" role="button">Add</button>
+    </section>
   </section>
 </form>

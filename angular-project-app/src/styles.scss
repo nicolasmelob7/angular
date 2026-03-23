@@ -1,20 +1,56 @@
+@use "@angular/material" as mat;
 @use "./variables" as vars;
 
 $font-size: 1.3rem;
 $font-family: serif;
 $font-weight: bold;
-$color: #ecf0f1;
+$font-color: #ecf0f1;
+
+html {
+  height: 100%;
+  @include mat.theme(
+    (
+      color: (
+        primary: mat.$magenta-palette,
+        tertiary: mat.$violet-palette,
+      ),
+      typography: Roboto,
+      density: 0,
+    )
+  );
+}
+
+body {
+  // Default the application to a light color theme. This can be changed to
+  // `dark` to enable the dark color theme, or to `light dark` to defer to the
+  // user's system settings.
+  color-scheme: dark;
+
+  // Set a default background, font and text colors for the application using
+  // Angular Material's system-level CSS variables. Learn more about these
+  // variables at https://material.angular.dev/guide/system-variables
+  background-color: var(--mat-sys-surface);
+  color: var(--mat-sys-on-surface);
+  font: var(--mat-sys-body-medium);
+
+  // Reset the user agent margin.
+  margin: 0;
+  height: 100%;
+}
 
 p,
 span {
   font-size: $font-size;
   font-family: $font-family;
   font-weight: $font-weight;
-  color: $color;
+  color: $font-color;
 }
 
 .title {
-  font-size: 2rem;
+  font-size: 3rem;
+  font-family: $font-family;
+  font-weight: $font-weight;
+  color: #919191;
 }
 
 ul {
@@ -23,81 +59,66 @@ ul {
   margin: 0;
 }
 
-input {
-  color: white;
-  border: 2px solid #8707ff;
-  border-radius: 10px;
-  padding: 10px 25px;
-  background: transparent;
-}
-
-input:active {
-  box-shadow: 2px 2px 15px #8707ff inset;
-}
-
-.grid-container-input-2col {
+.grid-container-input-2-col {
   display: grid;
-  grid-template-columns: 50% auto;
+  grid-template-columns: 50% 50%;
+  grid-template-areas: "column-1 column-2";
 
-  grid-template-areas: "column1 column2";
+  .column-1 {
+    width: 100%;
+    grid-area: column-1;
+  }
 
-  .column1 {
-    grid-area: column1;
+  .column-2 {
+    width: 100%;
+    grid-area: column-2;
+  }
+
+  .column-1 div[name="div-input"] {
+    width: 50%;
+    display: grid;
     justify-self: flex-start;
+    margin-bottom: 0.3rem;
   }
 
-  .column2 {
-    grid-area: column2;
+  .column-2 div[name="div-input"] {
+    width: 50%;
+    display: grid;
     justify-self: flex-end;
+    margin-bottom: 0.3rem;
   }
 
-  input {
-    width: 20rem;
-  }
-}
-
-.container-input {
-  div {
-    margin-top: 1rem;
-  }
-
-  div:first-child {
-    margin-top: 0rem;
+  .column-2 button[type="submit"] {
+    display: grid;
+    justify-self: flex-end;
   }
 }
 
 .button-submit {
-  margin-top: 3rem;
-
-  button {
-    background: linear-gradient(to bottom right, vars.$font-st-color, #000);
-    border: 0;
-    border-radius: 12px;
-    font-size: $font-size;
-    font-family: $font-family;
-    font-weight: $font-weight;
-    color: $color;
-    line-height: 2.5;
-    padding: 0 1rem;
-    text-align: center;
-    white-space: nowrap;
-  }
+  margin-top: 0.5rem;
+  background: linear-gradient(to bottom right, vars.$font-st-color, #000);
+  border: 0;
+  border-radius: 12px;
+  font-size: $font-size;
+  font-family: $font-family;
+  font-weight: $font-weight;
+  color: $font-color;
+  line-height: 2.5;
+  padding: 0 1rem;
+  text-align: center;
+  white-space: nowrap;
 }
 
 .button-submit:not([disabled]):focus {
-  button {
-    box-shadow:
-      0 0 0.25rem rgba(0, 0, 0, 0.5),
-      -0.125rem -0.125rem 1rem #000,
-      0.125rem 0.125rem 1rem vars.$font-st-color;
-  }
+  box-shadow:
+    0 0 0.25rem rgba(0, 0, 0, 0.5),
+    -0.125rem -0.125rem 1rem #000,
+    0.125rem 0.125rem 1rem vars.$font-st-color;
 }
 
 .button-submit:not([disabled]):hover {
-  button {
-    box-shadow:
-      0 0 0.25rem rgba(0, 0, 0, 0.5),
-      -0.125rem -0.125rem 1rem #000,
-      0.125rem 0.125rem 1rem vars.$font-st-color;
-  }
+  box-shadow:
+    0 0 0.25rem rgba(0, 0, 0, 0.5),
+    -0.125rem -0.125rem 1rem #000,
+    0.125rem 0.125rem 1rem vars.$font-st-color;
 }

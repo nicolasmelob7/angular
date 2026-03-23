@@ -1,0 +1,21 @@
+<div name="div-input">
+  <span>{{name()}}</span>
+  <mat-form-field>
+    @if (labelInput() != ''){
+    <mat-label>{{labelInput()}}</mat-label>
+    }
+    <input
+      matInput
+      [id]="id()"
+      [type]="type()"
+      [placeholder]="placeholder()"
+      [formField]="model()"
+      (focus)="onFocus()"
+      (blur)="onBlur()"
+    />
+    @let state = model()(); @if (state.touched() && state.invalid() &&
+    onBlurFlag) {
+    <mat-error>{{ state.errors()[0].message }}</mat-error>
+    }
+  </mat-form-field>
+</div>

@@ -7,12 +7,18 @@ import { Course } from './course.model';
 export class CoursesService {
   courses = signal<Course[]>([]);
 
+  constructor() {
+    this.courses = signal<Course[]>(
+      JSON.parse(localStorage.getItem('courses') ?? '[]'),
+    );
+  }
+
   addCourse(courseData: {
     title: string;
     teacher: string;
-    date: Date;
-    startTime: string;
-    endTime: string;
+    date: Date | null;
+    startTime: Date | null;
+    endTime: Date | null;
   }) {
     const newCourse: Course = {
       ...courseData,
@@ -20,5 +26,10 @@ export class CoursesService {
     };
 
     this.courses.update((oldCourses) => [...oldCourses, newCourse]);
+    this.saveCourses();
+  }
+
+  private saveCourses() {
+    localStorage.setItem('courses', JSON.stringify(this.courses()));
   }
 }
