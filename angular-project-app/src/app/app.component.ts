@@ -3,11 +3,12 @@ import { faArrowLeft, faArrowRight } from '@fortawesome/free-solid-svg-icons';
 import { SidebarComponent } from '@components/sidebar/sidebar.component';
 import { CommonModule } from '@angular/common';
 import { RouterOutlet } from '@angular/router';
+import { LoadingComponent } from './shared/components/loading/loading.component';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [SidebarComponent, CommonModule, RouterOutlet],
+  imports: [SidebarComponent, CommonModule, RouterOutlet, LoadingComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',
 })

@@ -1,28 +1,28 @@
-import { Component, input } from '@angular/core';
+import { Component, input, model } from '@angular/core';
 import { FieldTree, FormField } from '@angular/forms/signals';
 import { provideNativeDateAdapter } from '@angular/material/core';
+import { MatDatepickerModule } from '@angular/material/datepicker';
 import {
   MatFormFieldAppearance,
   MatFormFieldModule,
 } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
-import { MatTimepickerModule } from '@angular/material/timepicker';
 
 @Component({
-  selector: 'time-input',
+  selector: 'date-input',
   providers: [provideNativeDateAdapter()],
-  imports: [FormField, MatFormFieldModule, MatInputModule, MatTimepickerModule],
-  templateUrl: './time-input.html',
-  styleUrl: './time-input.scss',
+  imports: [FormField, MatFormFieldModule, MatInputModule, MatDatepickerModule],
+  templateUrl: './date-input.component.html',
+  styleUrl: './date-input.component.scss',
 })
-export class TimeInput {
+export class DateInput {
   id = input<string>(Date().toLocaleString());
   name = input<string>();
-  model = input.required<FieldTree<string | number | boolean | Date | null>>();
+  model = model.required<FieldTree<string | number | boolean | Date | null>>();
   labelInput = input<string>('');
   placeholder = input<string>('');
-  minTime = input<Date | null>();
-  maxTime = input<Date | null>();
+  minDate = input<Date>();
+  maxDate = input<Date>();
   onBlurFlag = true;
 
   onFocus() {

@@ -1,17 +1,13 @@
-import { Injectable, signal } from '@angular/core';
+import { inject, Injectable, signal } from '@angular/core';
 import { Course } from './course.model';
+import { HttpClient } from '@angular/common/http';
+import { catchError, throwError } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
 })
 export class CoursesService {
-  courses = signal<Course[]>([]);
-
-  constructor() {
-    this.courses = signal<Course[]>(
-      JSON.parse(localStorage.getItem('courses') ?? '[]'),
-    );
-  }
+  private httpClient = inject(HttpClient);
 
   addCourse(courseData: {
     title: string;
@@ -21,16 +17,15 @@ export class CoursesService {
     startTime: Date | null;
     endTime: Date | null;
   }) {
-    const newCourse: Course = {
-      ...courseData,
-      id: Date.now().toString(),
-    };
-
-    this.courses.update((oldCourses) => [...oldCourses, newCourse]);
-    this.saveCourses();
-  }
-
-  private saveCourses() {
-    localStorage.setItem('courses', JSON.stringify(this.courses()));
+    return this.httpClient
+      .post<{ courses: Course[] }>('http://localhost:3000/courses', courseData)
+      .pipe(
+        catchError((error) => {
+          console.log(error);
+          return throwError(() => {
+            new Error('Something went wrong!');
+          });
+        }),
+      );
   }
 }

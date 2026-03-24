@@ -1,18 +1,17 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { DateInput } from './date-input';
+import { InputText } from './my-input.component';
 
-describe('DateInput', () => {
-  let component: DateInput;
-  let fixture: ComponentFixture<DateInput>;
+describe('InputText', () => {
+  let component: InputText;
+  let fixture: ComponentFixture<InputText>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [DateInput]
-    })
-    .compileComponents();
+      imports: [InputText],
+    }).compileComponents();
 
-    fixture = TestBed.createComponent(DateInput);
+    fixture = TestBed.createComponent(InputText);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

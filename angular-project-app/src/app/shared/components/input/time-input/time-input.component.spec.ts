@@ -1,17 +1,17 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { InputText } from './my-input';
+import { TimeInput } from './time-input.component';
 
-describe('InputText', () => {
-  let component: InputText;
-  let fixture: ComponentFixture<InputText>;
+describe('TimeInput', () => {
+  let component: TimeInput;
+  let fixture: ComponentFixture<TimeInput>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [InputText],
+      imports: [TimeInput],
     }).compileComponents();
 
-    fixture = TestBed.createComponent(InputText);
+    fixture = TestBed.createComponent(TimeInput);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

@@ -1,0 +1,12 @@
+@if (loading$ | async) {
+  <div class="loading-container">
+    @if (customLoadingIndicator) {
+      <ng-container *ngTemplateOutlet="customLoadingIndicator" />
+    } @else {
+      <div class="loader">
+        <img src="../../../assets/images/icon.png" />
+      </div>
+      <p>waiting</p>
+    }
+  </div>
+}

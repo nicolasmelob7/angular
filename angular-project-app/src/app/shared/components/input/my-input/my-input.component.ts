@@ -9,14 +9,14 @@ import { MatInputModule } from '@angular/material/input';
 @Component({
   selector: 'my-input',
   imports: [FormField, MatFormFieldModule, MatInputModule],
-  templateUrl: './my-input.html',
-  styleUrl: './my-input.scss',
+  templateUrl: './my-input.component.html',
+  styleUrl: './my-input.component.scss',
 })
 export class MyInput {
   id = input<string>(Date().toLocaleString());
   name = input<string>();
   type = input<string>('text');
-  model = input.required<FieldTree<string | number | boolean | Date | null>>();
+  model = model.required<FieldTree<string | number | boolean | Date | null>>();
   labelInput = input<string>('');
   placeholder = input<string>('');
   onBlurFlag = true;

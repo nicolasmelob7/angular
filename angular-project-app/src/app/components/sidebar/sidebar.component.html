@@ -5,7 +5,7 @@
 
   <section class="sidebar-menu">
     <ul>
-      <ng-container *ngFor="let item of menuItems">
+      @for (item of menuItems; track $index) {
         <li class="sidebar-menu-item">
           <a
             [routerLink]="item.routerLink"
@@ -19,31 +19,33 @@
           >
             <fa-icon [icon]="item.icon"></fa-icon>
             <span class="sidebar-item-text">{{ item.label }}</span>
-            <fa-icon
-              [icon]="faChevronDown()"
-              *ngIf="item.children && !isSidebarCollapsed()"
-              class="sidebar-item-arrow"
-              [ngClass]="{ rotated: item.isOpen }"
-            >
-            </fa-icon>
-          </a>
-          <ul
-            *ngIf="item.children && !isSidebarCollapsed() && item.isOpen"
-            class="sidebar-submenu"
-          >
-            <li *ngFor="let child of item.children">
-              <a
-                class="sidebar-item sidebar-subitem"
-                [routerLink]="child.routerLink"
-                routerLinkActive="selected"
+            @if (item.children && !isSidebarCollapsed()) {
+              <fa-icon
+                [icon]="faChevronDown()"
+                class="sidebar-item-arrow"
+                [ngClass]="{ rotated: item.isOpen }"
               >
-                <fa-icon [icon]="child.icon"></fa-icon>
-                <span class="sidebar-item-text">{{ child.label }}</span>
-              </a>
-            </li>
-          </ul>
+              </fa-icon>
+            }
+          </a>
+          @if (item.children && !isSidebarCollapsed() && item.isOpen) {
+            <ul class="sidebar-submenu">
+              @for (child of item.children; track $index) {
+                <li>
+                  <a
+                    class="sidebar-item sidebar-subitem"
+                    [routerLink]="child.routerLink"
+                    routerLinkActive="selected"
+                  >
+                    <fa-icon [icon]="child.icon"></fa-icon>
+                    <span class="sidebar-item-text">{{ child.label }}</span>
+                  </a>
+                </li>
+              }
+            </ul>
+          }
         </li>
-      </ng-container>
+      }
     </ul>
   </section>
 </nav>

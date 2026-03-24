@@ -1,20 +1,21 @@
 <div name="div-input">
-  @if(name()){
-  <span>{{name()}}</span>
-  }
   <mat-form-field>
     @if (labelInput() != ''){
     <mat-label>{{labelInput()}}</mat-label>
     }
     <input
       matInput
+      [matDatepicker]="picker"
+      [min]="minDate()"
+      [max]="maxDate()"
       [id]="id()"
-      [type]="type()"
       [placeholder]="placeholder()"
       [formField]="model()"
       (focus)="onFocus()"
       (blur)="onBlur()"
     />
+    <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+    <mat-datepicker #picker></mat-datepicker>
     @let state = model()(); @if (state.touched() && state.invalid() &&
     onBlurFlag) {
     <mat-error>{{ state.errors()[0].message }}</mat-error>
