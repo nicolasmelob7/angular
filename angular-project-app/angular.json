@@ -21,8 +21,8 @@
             "index": "src/index.html",
             "browser": "src/main.ts",
             "tsConfig": "tsconfig.app.json",
-            "assets": ["src/favicon.ico", "src/assets"],
-            "styles": ["src/styles.scss"]
+            "assets": ["src/assets/favicon.ico", "src/assets"],
+            "styles": ["src/assets/scss/styles.scss"]
           },
           "configurations": {
             "production": {
@@ -70,8 +70,8 @@
           "builder": "@angular/build:karma",
           "options": {
             "tsConfig": "tsconfig.spec.json",
-            "assets": ["src/favicon.ico", "src/assets"],
-            "styles": ["src/styles.scss"],
+            "assets": ["src/assets/favicon.ico", "src/assets"],
+            "styles": ["src/assets/scss/styles.scss"],
             "scripts": []
           }
         }

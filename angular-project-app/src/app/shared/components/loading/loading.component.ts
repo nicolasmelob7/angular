@@ -2,12 +2,13 @@ import { AsyncPipe, NgTemplateOutlet } from '@angular/common';
 import {
   Component,
   ContentChild,
+  inject,
   input,
   OnInit,
   TemplateRef,
 } from '@angular/core';
-import { Observable, tap } from 'rxjs';
-import { LoadingService } from '../../services/loading/loading.service';
+import { tap } from 'rxjs';
+import { LoadingService } from './service/loading.service';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import {
   RouteConfigLoadEnd,
@@ -22,34 +23,12 @@ import {
   imports: [MatProgressSpinnerModule, AsyncPipe, NgTemplateOutlet],
   standalone: true,
 })
-export class LoadingComponent implements OnInit {
-  loading$: Observable<boolean>;
+export class LoadingComponent {
+  loadingService = inject(LoadingService);
+  router = inject(Router);
 
-  detectRouteTransitions = input<boolean>();
+  loading$ = this.loadingService.loading$;
 
   @ContentChild('loading')
   customLoadingIndicator: TemplateRef<any> | null = null;
-
-  constructor(
-    private loadingService: LoadingService,
-    private router: Router,
-  ) {
-    this.loading$ = this.loadingService.loading$;
-  }
-
-  ngOnInit() {
-    if (this.detectRouteTransitions()) {
-      this.router.events
-        .pipe(
-          tap((event) => {
-            if (event instanceof RouteConfigLoadStart) {
-              this.loadingService.loadingOn();
-            } else if (event instanceof RouteConfigLoadEnd) {
-              this.loadingService.loadingOff();
-            }
-          }),
-        )
-        .subscribe();
-    }
-  }
 }

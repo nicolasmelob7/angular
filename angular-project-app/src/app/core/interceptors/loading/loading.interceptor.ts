@@ -5,7 +5,7 @@ import {
   HttpRequest,
 } from '@angular/common/http';
 import { inject } from '@angular/core';
-import { LoadingService } from '@src/app/shared/services/loading/loading.service';
+import { LoadingService } from '@src/app/shared/components/loading/service/loading.service';
 import { finalize, Observable } from 'rxjs';
 
 export function LoadingInterceptor(

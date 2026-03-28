@@ -15,7 +15,7 @@ $loader-color2: #ff1515;
 
   p {
     margin-left: 3rem;
-    font-size: 3dvw;
+    font-size: 4dvw;
     --w: 10ch;
     font-weight: bold;
     font-family: monospace;
@@ -58,8 +58,8 @@ $loader-color2: #ff1515;
 }
 
 .loader {
-  height: 6dvh;
-  width: 4dvw;
+  height: 7dvh;
+  width: 5dvw;
   display: inline-block;
   animation: rotation 1s linear infinite;
 }

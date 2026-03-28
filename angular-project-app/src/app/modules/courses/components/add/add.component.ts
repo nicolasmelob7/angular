@@ -5,8 +5,8 @@ import {
   OnDestroy,
   signal,
 } from '@angular/core';
-import { CoursesService } from '../courses.service';
-import { Course } from '../course.model';
+import { CoursesService } from '../../service/courses.service';
+import { Course } from '../../model/course.model';
 import { form, required, validate, submit } from '@angular/forms/signals';
 import { noWhiteSpaces } from '@src/app/shared/validators/no-white-spaces/no-white-spaces.validator';
 import { MyInput } from '@src/app/shared/components/input/my-input/my-input.component';

@@ -1,16 +1,17 @@
 import { Routes } from '@angular/router';
-import { HomeScreenComponent } from '@app/components/home-screen/home-screen.component';
-import { SimulateCoursesComponent } from '@app/components/courses/simulate/simulate.component';
-import { EditCoursesComponent } from '@app/components/courses/edit/edit.component';
-import { AddCourseComponent } from '@app/components/courses/add/add.component';
+import { HomeScreenComponent } from '@src/app/core/home/home-screen/home-screen.component';
+import { SimulateCoursesComponent } from '@src/app/modules/courses/components/simulate/simulate.component';
+import { EditCoursesComponent } from '@src/app/modules/courses/components/edit/edit.component';
+import { AddCourseComponent } from '@src/app/modules/courses/components/add/add.component';
+import { ListCourseComponent } from './modules/courses/components/list/list';
 
 export const pathRoutes = {
   homeScreen: '',
   courses: {
-    list: 'courses/list',
-    add: 'courses/add',
-    edit: 'courses/edit',
-    simulate: 'courses/simulate',
+    list: 'courses-list',
+    add: 'courses-add',
+    edit: 'courses-edit',
+    simulate: 'courses-simulate',
   },
 };
 
@@ -18,6 +19,10 @@ export const routes: Routes = [
   {
     path: pathRoutes.homeScreen,
     component: HomeScreenComponent,
+  },
+  {
+    path: pathRoutes.courses.list,
+    component: ListCourseComponent,
   },
   {
     path: pathRoutes.courses.simulate,
