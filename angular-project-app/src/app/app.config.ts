@@ -2,7 +2,7 @@ import {
   ApplicationConfig,
   provideZonelessChangeDetection,
 } from '@angular/core';
-import { provideRouter } from '@angular/router';
+import { provideRouter, withComponentInputBinding } from '@angular/router';
 
 import { routes } from './app.routes';
 import { MAT_FORM_FIELD_DEFAULT_OPTIONS } from '@angular/material/form-field';
@@ -12,9 +12,8 @@ import { HttpErrorInterceptor } from './core/interceptors/http-error/http-error.
 
 export const appConfig: ApplicationConfig = {
   providers: [
-    provideRouter(routes),
+    provideRouter(routes, withComponentInputBinding()),
     provideZonelessChangeDetection(),
-    provideHttpClient(),
     provideHttpClient(
       withInterceptors([LoadingInterceptor, HttpErrorInterceptor]),
     ),

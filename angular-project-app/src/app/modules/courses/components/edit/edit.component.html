@@ -1,1 +1,62 @@
-<section></section>
+<div class="title">
+  <p>Edit course</p>
+</div>
+<form (submit)="onSubmit($event)">
+  <h4>General informations</h4>
+  <section class="grid grid-cols-2 gap-4">
+    <my-input
+      [labelInput]="'Title'"
+      [model]="courseForm.title"
+      class="col-span-1"
+    >
+    </my-input>
+
+    <my-input
+      [labelInput]="'Teacher'"
+      [model]="courseForm.teacher"
+      class="col-span-1"
+    >
+    </my-input>
+
+    <my-input
+      [labelInput]="'Description'"
+      [model]="courseForm.description"
+      class="col-span-2"
+    >
+    </my-input>
+  </section>
+
+  <h4>When will it happen?</h4>
+  <section class="grid grid-cols-2 gap-2">
+    <time-input
+      [labelInput]="'Start'"
+      [model]="courseForm.startTime"
+      class="col-span-1"
+    >
+    </time-input>
+    <time-input
+      [labelInput]="'End'"
+      [minTime]="courseForm.startTime().value()"
+      [model]="courseForm.endTime"
+      class="col-span-1"
+    >
+    </time-input>
+    <date-input
+      [labelInput]="'Date'"
+      [minDate]="minDate"
+      [model]="courseForm.date"
+      class="col-span-1"
+    >
+    </date-input>
+  </section>
+
+  <section class="grid grid-col-1">
+    <button
+      type="submit"
+      class="button-submit justify-self-end span-col-1"
+      role="button"
+    >
+      Edit
+    </button>
+  </section>
+</form>

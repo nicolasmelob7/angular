@@ -10,20 +10,6 @@ import { Pagination } from '@src/app/shared/models/pagination/pagination.model';
 export class CoursesService {
   private httpClient = inject(HttpClient);
 
-  addCourse(courseData: {
-    title: string;
-    teacher: string;
-    description: string;
-    date: Date | null;
-    startTime: Date | null;
-    endTime: Date | null;
-  }) {
-    return this.httpClient.post<{ course: Course }>(
-      'http://localhost:3000/courses',
-      courseData,
-    );
-  }
-
   getCourses(
     pageIndex: number = 0,
     pageSize: number = 5,
@@ -49,5 +35,33 @@ export class CoursesService {
           totalElements: response.pagination.totalElements,
         })),
       );
+  }
+
+  addCourse(courseData: {
+    title: string;
+    teacher: string;
+    description: string;
+    date: Date | null;
+    startTime: Date | null;
+    endTime: Date | null;
+  }) {
+    return this.httpClient.post<{ course: Course }>(
+      'http://localhost:3000/courses',
+      courseData,
+    );
+  }
+
+  update(courseData: {
+    title: string;
+    teacher: string;
+    description: string;
+    date: Date | null;
+    startTime: Date | null;
+    endTime: Date | null;
+  }) {
+    return this.httpClient.put<{ course: Course }>(
+      'http://localhost:3000/courses',
+      courseData,
+    );
   }
 }

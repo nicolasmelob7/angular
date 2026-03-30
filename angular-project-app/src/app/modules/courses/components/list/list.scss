@@ -1,0 +1,11 @@
+.action {
+  display: inline-flex;
+
+  a:first-child {
+    padding-right: 1rem;
+  }
+}
+
+a {
+  cursor: pointer;
+}

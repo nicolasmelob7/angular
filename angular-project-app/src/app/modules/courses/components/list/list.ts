@@ -1,22 +1,44 @@
 import { Component, inject, OnDestroy, OnInit } from '@angular/core';
-import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
-import { MatTableDataSource, MatTableModule } from '@angular/material/table';
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatTableModule } from '@angular/material/table';
 import { CoursesService } from '../../service/courses.service';
 import { Course } from '../../model/course.model';
 import { Subject, takeUntil } from 'rxjs';
+import { CommonModule } from '@angular/common';
+import { pathRoutes } from '@src/app/app.routes';
+import { Router, RouterLink } from '@angular/router';
+import { MatIconModule } from '@angular/material/icon';
+import { MatTooltipModule } from '@angular/material/tooltip';
+import { CoursesProviderService } from '../../service/courses-provider.service';
 
 @Component({
   selector: 'app-list',
   standalone: true,
-  imports: [MatTableModule, MatPaginatorModule],
+  imports: [
+    CommonModule,
+    MatTableModule,
+    MatPaginatorModule,
+    MatIconModule,
+    MatTooltipModule,
+  ],
   templateUrl: './list.html',
   styleUrl: './list.scss',
 })
 export class ListCourseComponent implements OnInit, OnDestroy {
   private courseService = inject(CoursesService);
   private ngUnsubscribe = new Subject<void>();
+  private courseProviderService = inject(CoursesProviderService);
+  private router = inject(Router);
+  readonly pathRoutes = pathRoutes;
 
-  displayedColumns: string[] = ['title', 'teacher', 'date', 'start', 'end'];
+  displayedColumns: string[] = [
+    'title',
+    'teacher',
+    'date',
+    'start',
+    'end',
+    'action',
+  ];
   courses = new Array<Course>();
   pageIndex = 0;
   pageSize = 5;
@@ -45,6 +67,13 @@ export class ListCourseComponent implements OnInit, OnDestroy {
     this.pageSize = event.pageSize;
     this.fetchCourses(this.pageIndex, this.pageSize);
   }
+
+  onEdit(course: Course) {
+    this.courseProviderService.sendCourse(course);
+    this.router.navigateByUrl(this.pathRoutes.courses.edit);
+  }
+
+  onDelete(course: Course) {}
 
   ngOnDestroy() {
     this.ngUnsubscribe.next();
