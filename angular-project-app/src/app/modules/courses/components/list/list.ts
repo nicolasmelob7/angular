@@ -73,7 +73,16 @@ export class ListCourseComponent implements OnInit, OnDestroy {
     this.router.navigateByUrl(this.pathRoutes.courses.edit);
   }
 
-  onDelete(course: Course) {}
+  onDelete(course: Course) {
+    this.courseService
+      .delete(course.id)
+      .pipe(takeUntil(this.ngUnsubscribe))
+      .subscribe({
+        next: (resData) => {
+          this.router.navigate([pathRoutes.homeScreen]);
+        },
+      });
+  }
 
   ngOnDestroy() {
     this.ngUnsubscribe.next();

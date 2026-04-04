@@ -1,36 +1,29 @@
-import {
-  Component,
-  DestroyRef,
-  inject,
-  OnDestroy,
-  signal,
-} from '@angular/core';
+import { Component, inject, OnDestroy, signal } from '@angular/core';
 import { CoursesService } from '../../service/courses.service';
 import { Course } from '../../model/course.model';
-import {
-  form,
-  required,
-  validate,
-  submit,
-  SchemaPathTree,
-  PathKind,
-} from '@angular/forms/signals';
-import { noWhiteSpaces } from '@src/app/shared/validators/no-white-spaces/no-white-spaces.validator';
-import { MyInput } from '@src/app/shared/components/input/my-input/my-input.component';
+import { form, submit, FormRoot, FormField } from '@angular/forms/signals';
 import { provideNativeDateAdapter } from '@angular/material/core';
-import { DateInput } from '@src/app/shared/components/input/date-input/date-input.component';
-import { TimeInput } from '@src/app/shared/components/input/time-input/time-input.component';
 import { Router } from '@angular/router';
-import { minDateTime } from '@src/app/shared/validators/min-date-time/min-date-time.validator';
 import { pathRoutes } from '@src/app/app.routes';
 import { Subject, takeUntil } from 'rxjs';
 import { validatorCourseForm } from '../../validator/form-add-edit.validator';
+import { MatInputModule } from '@angular/material/input';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatTimepickerModule } from '@angular/material/timepicker';
+import { MatDatepickerModule } from '@angular/material/datepicker';
 
 @Component({
   selector: 'app-add-course',
   standalone: true,
   providers: [provideNativeDateAdapter()],
-  imports: [MyInput, DateInput, TimeInput],
+  imports: [
+    FormRoot,
+    FormField,
+    MatFormFieldModule,
+    MatInputModule,
+    MatTimepickerModule,
+    MatDatepickerModule,
+  ],
   templateUrl: './add.component.html',
   styleUrl: './add.component.scss',
 })

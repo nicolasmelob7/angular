@@ -1,6 +1,6 @@
 import { inject, Injectable, signal } from '@angular/core';
 import { Course } from '../model/course.model';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { catchError, map, Observable, throwError } from 'rxjs';
 import { Pagination } from '@src/app/shared/models/pagination/pagination.model';
 
@@ -63,5 +63,9 @@ export class CoursesService {
       'http://localhost:3000/courses',
       courseData,
     );
+  }
+
+  delete(id: string) {
+    return this.httpClient.delete(`http://localhost:3000/courses/${id}`);
   }
 }

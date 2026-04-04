@@ -1,9 +1,6 @@
-import { Component, input, model, ViewEncapsulation } from '@angular/core';
-import { FieldState, FieldTree, FormField } from '@angular/forms/signals';
-import {
-  MatFormFieldAppearance,
-  MatFormFieldModule,
-} from '@angular/material/form-field';
+import { Component, input, model } from '@angular/core';
+import { FieldTree, FormField } from '@angular/forms/signals';
+import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 
 @Component({

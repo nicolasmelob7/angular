@@ -1,53 +1,69 @@
 <div class="title">
   <p>Edit course</p>
 </div>
-<form (submit)="onSubmit($event)">
+<form [formRoot]="courseForm" (submit)="onSubmit($event)">
   <h4>General informations</h4>
   <section class="grid grid-cols-2 gap-4">
-    <my-input
-      [labelInput]="'Title'"
-      [model]="courseForm.title"
-      class="col-span-1"
-    >
-    </my-input>
+    <mat-form-field class="col-span-1">
+      <mat-label>Title</mat-label>
+      <input matInput [formField]="courseForm.title" />
+      <mat-error> {{ courseForm.title().errors()[0]?.message }} </mat-error>
+    </mat-form-field>
 
-    <my-input
-      [labelInput]="'Teacher'"
-      [model]="courseForm.teacher"
-      class="col-span-1"
-    >
-    </my-input>
+    <mat-form-field class="col-span-1">
+      <mat-label>Teacher</mat-label>
+      <input matInput [formField]="courseForm.teacher" />
+      <mat-error> {{ courseForm.teacher().errors()[0]?.message }} </mat-error>
+    </mat-form-field>
 
-    <my-input
-      [labelInput]="'Description'"
-      [model]="courseForm.description"
-      class="col-span-2"
-    >
-    </my-input>
+    <mat-form-field class="col-span-2">
+      <mat-label>Description</mat-label>
+      <input matInput [formField]="courseForm.description" />
+      <mat-error>
+        {{ courseForm.description().errors()[0]?.message }}
+      </mat-error>
+    </mat-form-field>
   </section>
 
   <h4>When will it happen?</h4>
   <section class="grid grid-cols-2 gap-2">
-    <time-input
-      [labelInput]="'Start'"
-      [model]="courseForm.startTime"
-      class="col-span-1"
-    >
-    </time-input>
-    <time-input
-      [labelInput]="'End'"
-      [minTime]="courseForm.startTime().value()"
-      [model]="courseForm.endTime"
-      class="col-span-1"
-    >
-    </time-input>
-    <date-input
-      [labelInput]="'Date'"
-      [minDate]="minDate"
-      [model]="courseForm.date"
-      class="col-span-1"
-    >
-    </date-input>
+    <mat-form-field class="col-span-1">
+      <mat-label>Start</mat-label>
+      <input
+        matInput
+        [matTimepicker]="startTime"
+        [formField]="courseForm.startTime"
+      />
+      <mat-error> {{ courseForm.startTime().errors()[0]?.message }} </mat-error>
+      <mat-timepicker-toggle matIconSuffix [for]="startTime" />
+      <mat-timepicker #startTime />
+    </mat-form-field>
+
+    <mat-form-field class="col-span-1">
+      <mat-label>End</mat-label>
+      <input
+        matInput
+        [matTimepicker]="endTime"
+        [matTimepickerMin]="courseForm.startTime().value()"
+        [formField]="courseForm.endTime"
+      />
+      <mat-error> {{ courseForm.endTime().errors()[0]?.message }} </mat-error>
+      <mat-timepicker-toggle matIconSuffix [for]="endTime" />
+      <mat-timepicker #endTime />
+    </mat-form-field>
+
+    <mat-form-field class="col-span-1">
+      <mat-label>Date</mat-label>
+      <input
+        matInput
+        [matDatepicker]="date"
+        [min]="minDate"
+        [formField]="courseForm.date"
+      />
+      <mat-error> {{ courseForm.date().errors()[0]?.message }} </mat-error>
+      <mat-datepicker-toggle matIconSuffix [for]="date"></mat-datepicker-toggle>
+      <mat-datepicker #date></mat-datepicker>
+    </mat-form-field>
   </section>
 
   <section class="grid grid-col-1">

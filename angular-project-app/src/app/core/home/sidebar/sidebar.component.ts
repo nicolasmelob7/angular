@@ -47,11 +47,6 @@ export class SidebarComponent {
         { icon: faCoffee, label: 'Add', routerLink: [pathRoutes.courses.add] },
         {
           icon: faCoffee,
-          label: 'Edit',
-          routerLink: [pathRoutes.courses.edit],
-        },
-        {
-          icon: faCoffee,
           label: 'Simulate',
           routerLink: [pathRoutes.courses.simulate],
         },

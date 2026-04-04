@@ -19,12 +19,13 @@ export function minDateTime(
   options?: { message?: string },
 ) {
   validate(field, ({ value, valueOf }) => {
-    const dateTimeField = value() as Date;
-    const dateTimeMin = (
+    const dateTimeField = new Date(value() ?? '');
+
+    const dateTimeMin =
       isDate(minDateTime) || isNull(minDateTime)
         ? (minDateTime as Date)
-        : valueOf(minDateTime as SchemaPath<Date | null>)
-    ) as Date;
+        : new Date(valueOf(minDateTime as SchemaPath<Date | null>) ?? '');
+
     if (dateTimeField < dateTimeMin)
       return {
         kind: 'min-date-time',
