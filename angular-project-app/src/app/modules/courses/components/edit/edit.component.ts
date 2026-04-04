@@ -1,8 +1,5 @@
 import { Component, inject, signal } from '@angular/core';
 import { provideNativeDateAdapter } from '@angular/material/core';
-import { DateInput } from '@src/app/shared/components/input/date-input/date-input.component';
-import { MyInput } from '@src/app/shared/components/input/my-input/my-input.component';
-import { TimeInput } from '@src/app/shared/components/input/time-input/time-input.component';
 import { CoursesService } from '../../service/courses.service';
 import { Router } from '@angular/router';
 import { first, skip, Subject, takeUntil } from 'rxjs';
@@ -22,6 +19,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatTimepickerModule } from '@angular/material/timepicker';
 import { MatDatepickerModule } from '@angular/material/datepicker';
+import { ResetTouchedOnFocusDirective } from '@src/app/shared/directives/reset-touched-on-focus/reset-touched-on-focus.directive';
 
 @Component({
   selector: 'app-edit-courses',
@@ -34,6 +32,7 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
     MatInputModule,
     MatTimepickerModule,
     MatDatepickerModule,
+    ResetTouchedOnFocusDirective,
   ],
   templateUrl: './edit.component.html',
   styleUrl: './edit.component.scss',

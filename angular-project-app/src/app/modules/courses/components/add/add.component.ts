@@ -1,7 +1,21 @@
-import { Component, inject, OnDestroy, signal } from '@angular/core';
+import {
+  Component,
+  Directive,
+  HostBinding,
+  HostListener,
+  inject,
+  OnDestroy,
+  signal,
+} from '@angular/core';
 import { CoursesService } from '../../service/courses.service';
 import { Course } from '../../model/course.model';
-import { form, submit, FormRoot, FormField } from '@angular/forms/signals';
+import {
+  form,
+  submit,
+  FormRoot,
+  FormField,
+  FieldTree,
+} from '@angular/forms/signals';
 import { provideNativeDateAdapter } from '@angular/material/core';
 import { Router } from '@angular/router';
 import { pathRoutes } from '@src/app/app.routes';
@@ -11,6 +25,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatTimepickerModule } from '@angular/material/timepicker';
 import { MatDatepickerModule } from '@angular/material/datepicker';
+import { ResetTouchedOnFocusDirective } from '@src/app/shared/directives/reset-touched-on-focus/reset-touched-on-focus.directive';
 
 @Component({
   selector: 'app-add-course',
@@ -23,6 +38,7 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
     MatInputModule,
     MatTimepickerModule,
     MatDatepickerModule,
+    ResetTouchedOnFocusDirective,
   ],
   templateUrl: './add.component.html',
   styleUrl: './add.component.scss',
@@ -66,5 +82,9 @@ export class AddCourseComponent implements OnDestroy {
   ngOnDestroy() {
     this.ngUnsubscribe.next();
     this.ngUnsubscribe.complete();
+  }
+
+  onFocus(fieldTree: FieldTree<string | string>) {
+    fieldTree().reset();
   }
 }

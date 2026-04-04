@@ -6,19 +6,23 @@
   <section class="grid grid-cols-2 gap-4">
     <mat-form-field class="col-span-1">
       <mat-label>Title</mat-label>
-      <input matInput [formField]="courseForm.title" />
+      <input matInput [formField]="courseForm.title" resetTouchedOnFocus />
       <mat-error> {{ courseForm.title().errors()[0]?.message }} </mat-error>
     </mat-form-field>
 
     <mat-form-field class="col-span-1">
       <mat-label>Teacher</mat-label>
-      <input matInput [formField]="courseForm.teacher" />
+      <input matInput [formField]="courseForm.teacher" resetTouchedOnFocus />
       <mat-error> {{ courseForm.teacher().errors()[0]?.message }} </mat-error>
     </mat-form-field>
 
     <mat-form-field class="col-span-2">
       <mat-label>Description</mat-label>
-      <input matInput [formField]="courseForm.description" />
+      <input
+        matInput
+        [formField]="courseForm.description"
+        resetTouchedOnFocus
+      />
       <mat-error>
         {{ courseForm.description().errors()[0]?.message }}
       </mat-error>
@@ -33,6 +37,7 @@
         matInput
         [matTimepicker]="startTime"
         [formField]="courseForm.startTime"
+        resetTouchedOnFocus
       />
       <mat-error> {{ courseForm.startTime().errors()[0]?.message }} </mat-error>
       <mat-timepicker-toggle matIconSuffix [for]="startTime" />
@@ -46,6 +51,7 @@
         [matTimepicker]="endTime"
         [matTimepickerMin]="courseForm.startTime().value()"
         [formField]="courseForm.endTime"
+        resetTouchedOnFocus
       />
       <mat-error> {{ courseForm.endTime().errors()[0]?.message }} </mat-error>
       <mat-timepicker-toggle matIconSuffix [for]="endTime" />
@@ -59,6 +65,7 @@
         [matDatepicker]="date"
         [min]="minDate"
         [formField]="courseForm.date"
+        resetTouchedOnFocus
       />
       <mat-error> {{ courseForm.date().errors()[0]?.message }} </mat-error>
       <mat-datepicker-toggle matIconSuffix [for]="date"></mat-datepicker-toggle>
