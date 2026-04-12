@@ -1,1 +1,107 @@
-<p>simulate works!</p>
+<div class="title">
+  <p>Simulate</p>
+</div>
+<form [formRoot]="fieldForm" (submit)="onSubmitFields($event)">
+  <h4>Choose the fields</h4>
+  <section class="grid grid-cols-2 gap-4">
+    <mat-form-field class="col-span-1">
+      <mat-label>Fields</mat-label>
+      <mat-select [formField]="fieldForm.fields" multiple>
+        @for (field of FIELDS; track $index) {
+          <mat-option [value]="field.id">{{ field.field }}</mat-option>
+        }
+      </mat-select>
+      <mat-error>
+        {{ fieldForm.fields().errors()[0]?.message }}
+      </mat-error>
+    </mat-form-field>
+  </section>
+  <section class="grid grid-col-1">
+    <button
+      type="submit"
+      class="button-submit justify-self-end span-col-1"
+      role="button"
+    >
+      Search
+    </button>
+  </section>
+</form>
+
+@if (showCourses) {
+  <form [formRoot]="courseForm" (submit)="onSubmitCourse($event)">
+    <h4>Choose the course</h4>
+    <section class="grid grid-cols-2 gap-4">
+      <mat-form-field class="col-span-1">
+        <mat-label>Courses</mat-label>
+        <mat-select
+          [formField]="courseForm.courseSelected"
+          [compareWith]="compareCourseFn"
+        >
+          @for (course of courses(); track $index) {
+            <mat-option [value]="course">{{ course.name }}</mat-option>
+          }
+        </mat-select>
+      </mat-form-field>
+
+      <mat-form-field class="col-span-1">
+        <mat-label>Day</mat-label>
+        <mat-select
+          [formField]="courseForm.daySelected"
+          [compareWith]="compareDayFn"
+        >
+          @for (
+            daysCourse of courseForm.courseSelected.daysCourse;
+            track $index
+          ) {
+            <mat-option [value]="daysCourse().value()">
+              {{ daysCourse.dayLabel().value() }}</mat-option
+            >
+          }
+        </mat-select>
+      </mat-form-field>
+    </section>
+
+    <section class="grid grid-cols-2 gap-4">
+      <mat-form-field class="col-span-1 row-start-2">
+        <mat-label>Start</mat-label>
+        <input
+          matInput
+          [matTimepicker]="startTime"
+          [formField]="courseForm.daySelected.startTime"
+          resetTouchedOnFocus
+        />
+        <mat-error>
+          {{ courseForm.daySelected.startTime().errors()[0]?.message }}
+        </mat-error>
+        <mat-timepicker-toggle matIconSuffix [for]="startTime" />
+        <mat-timepicker #startTime />
+      </mat-form-field>
+
+      <mat-form-field class="col-span-1 row-start-2">
+        <mat-label>End</mat-label>
+        <input
+          matInput
+          [matTimepicker]="endTime"
+          [matTimepickerMin]="courseForm.daySelected.startTime().value()"
+          [formField]="courseForm.daySelected.endTime"
+          resetTouchedOnFocus
+        />
+        <mat-error>
+          {{ courseForm.daySelected.endTime().errors()[0]?.message }}
+        </mat-error>
+        <mat-timepicker-toggle matIconSuffix [for]="endTime" />
+        <mat-timepicker #endTime />
+      </mat-form-field>
+    </section>
+
+    <section class="grid grid-col-1">
+      <button
+        type="submit"
+        class="button-submit justify-self-end span-col-1"
+        role="button"
+      >
+        Simulate
+      </button>
+    </section>
+  </form>
+}

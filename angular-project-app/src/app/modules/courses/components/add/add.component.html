@@ -11,13 +11,25 @@
     </mat-form-field>
 
     <mat-form-field class="col-span-1">
-      <mat-label>Teacher</mat-label>
-      <input matInput [formField]="courseForm.teacher" />
+      <mat-label>Field</mat-label>
+      <mat-select [formField]="courseForm.field">
+        @for (field of FIELDS; track $index) {
+          <mat-option [value]="field.id">{{ field.field }}</mat-option>
+        }
+      </mat-select>
+      <mat-error>
+        {{ courseForm.field().errors()[0]?.message }}
+      </mat-error>
     </mat-form-field>
 
     <mat-form-field class="col-span-2">
       <mat-label>Description</mat-label>
       <input matInput [formField]="courseForm.description" />
+    </mat-form-field>
+
+    <mat-form-field class="col-span-1">
+      <mat-label>Teacher</mat-label>
+      <input matInput [formField]="courseForm.teacher" />
     </mat-form-field>
   </section>
 

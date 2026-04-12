@@ -1,0 +1,35 @@
+::ng-deep mat-form-field {
+  width: 100%;
+}
+
+form {
+  padding: 1rem 2rem;
+  border: 1px solid;
+  border-radius: 25px;
+
+  section {
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+}
+
+.days-course {
+  padding-top: 1rem;
+  border: 1px solid grey;
+}
+
+.add-remove-day {
+  margin-top: 1rem;
+  div {
+    display: flex;
+  }
+  a {
+    cursor: pointer;
+    width: fit-content;
+    span {
+      text-decoration: underline;
+      font-size: medium;
+      vertical-align: top;
+    }
+  }
+}

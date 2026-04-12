@@ -1,7 +1,7 @@
 import { Component, inject, OnDestroy, OnInit } from '@angular/core';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatTableModule } from '@angular/material/table';
-import { CourseList, CoursesService } from '../../service/courses.service';
+import { CoursesService } from '../../service/courses.service';
 import { Course } from '../../model/course.model';
 import { Subject, takeUntil } from 'rxjs';
 import { CommonModule } from '@angular/common';
@@ -11,6 +11,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { CoursesProviderService } from '../../service/courses-provider.service';
 import { DAYS_KEYS } from '@src/app/shared/constants/days/days.constant';
+import { CourseList } from '../../model/course-list.model';
 
 @Component({
   selector: 'app-list',
@@ -33,7 +34,7 @@ export class ListCourseComponent implements OnInit, OnDestroy {
   readonly pathRoutes = pathRoutes;
   readonly DAYS_KEYS = DAYS_KEYS;
 
-  displayedColumns: string[] = ['name', 'teacher', 'date', 'action'];
+  displayedColumns: string[] = ['name', 'field', 'teacher', 'date', 'action'];
   courses = new Array<CourseList>();
   pageIndex = 0;
   pageSize = 5;

@@ -1,6 +1,5 @@
 import {
   applyEach,
-  debounce,
   PathKind,
   required,
   SchemaPathTree,
@@ -13,6 +12,7 @@ export function validatorCourseForm(
   schemaPath: SchemaPathTree<Course, PathKind.Root>,
 ) {
   required(schemaPath.name, { message: 'Name is required' });
+  required(schemaPath.field, { message: 'Field is required' });
 
   noWhiteSpaces(schemaPath.name, { message: 'Name is required' });
 

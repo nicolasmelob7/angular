@@ -22,6 +22,7 @@ import { ResetTouchedOnFocusDirective } from '@src/app/shared/directives/reset-t
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { DAYS } from '@src/app/shared/constants/days/days.constant';
+import { FIELDS } from '../../constants/field.constant';
 
 @Component({
   selector: 'app-add-course',
@@ -48,11 +49,13 @@ export class AddCourseComponent implements OnDestroy {
   private ngUnsubscribe = new Subject<void>();
   readonly minDate = new Date();
   readonly DAYS = DAYS;
+  readonly FIELDS = FIELDS;
 
   courseModel = signal<Course>({
     id: '',
     name: '',
     teacher: '',
+    field: null,
     description: '',
     daysCourse: [
       {
@@ -116,9 +119,5 @@ export class AddCourseComponent implements OnDestroy {
   ngOnDestroy() {
     this.ngUnsubscribe.next();
     this.ngUnsubscribe.complete();
-  }
-
-  onFocus(fieldTree: FieldTree<string | string>) {
-    fieldTree().reset();
   }
 }

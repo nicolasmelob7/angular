@@ -4,14 +4,8 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 import { catchError, map, Observable, throwError } from 'rxjs';
 import { Pagination } from '@src/app/shared/models/pagination/pagination.model';
 import { Days, DAYS_KEYS } from '@src/app/shared/constants/days/days.constant';
-
-interface DaysCourseList extends DaysCourse {
-  dayLabel: string;
-}
-
-export interface CourseList extends Course {
-  daysCourse: DaysCourseList[];
-}
+import { CourseList } from '../model/course-list.model';
+import { Fields, FIELDS_KEYS } from '../constants/field.constant';
 
 @Injectable({
   providedIn: 'root',
@@ -22,6 +16,7 @@ export class CoursesService {
   getCourses(
     pageIndex: number = 0,
     pageSize: number = 5,
+    fields: Fields[] = new Array<Fields>(),
   ): Observable<{
     courses: CourseList[];
     totalElements: number;
@@ -33,15 +28,21 @@ export class CoursesService {
         };
         pagination: Pagination;
       }>('http://localhost:3000/courses', {
-        params: {
-          pageIndex: pageIndex,
-          pageSize: pageSize,
-        },
+        params:
+          fields.length > 0
+            ? {
+                fields: fields,
+              }
+            : {
+                pageIndex: pageIndex,
+                pageSize: pageSize,
+              },
       })
       .pipe(
         map((response) => ({
           courses: response.data.courses.map((course) => ({
             ...course,
+            fieldLabel: course.field ? FIELDS_KEYS[course.field] : '',
             daysCourse: course.daysCourse.map((dayCourse) => ({
               ...dayCourse,
               dayLabel: dayCourse.day ? DAYS_KEYS[dayCourse.day] : '',

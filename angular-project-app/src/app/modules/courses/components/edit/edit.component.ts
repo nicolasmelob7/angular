@@ -23,6 +23,7 @@ import { ResetTouchedOnFocusDirective } from '@src/app/shared/directives/reset-t
 import { MatSelectModule } from '@angular/material/select';
 import { DAYS } from '@src/app/shared/constants/days/days.constant';
 import { MatIconModule } from '@angular/material/icon';
+import { FIELDS } from '../../constants/field.constant';
 
 @Component({
   selector: 'app-edit-courses',
@@ -49,6 +50,7 @@ export class EditCoursesComponent {
   private ngUnsubscribe = new Subject<void>();
   readonly minDate = new Date();
   readonly DAYS = DAYS;
+  readonly FIELDS = FIELDS;
 
   courseModel = signal<Course>({} as Course);
   courseForm = form(this.courseModel);
@@ -67,9 +69,10 @@ export class EditCoursesComponent {
         next: (course) => {
           this.courseModel.set(course);
           this.courseForm = form(this.courseModel, (schemaPath) => {
-            (validatorCourseForm(schemaPath),
-              disabled(schemaPath.name),
-              disabled(schemaPath.description));
+            ((validatorCourseForm(schemaPath),
+            disabled(schemaPath.name),
+            disabled(schemaPath.description)),
+              disabled(schemaPath.field));
           });
 
           // let startTimeObservable = toObservable(
