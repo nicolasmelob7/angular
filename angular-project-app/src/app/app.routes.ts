@@ -1,9 +1,9 @@
 import { Routes } from '@angular/router';
-import { HomeScreenComponent } from '@src/app/core/home/home-screen/home-screen.component';
 import { SimulateCoursesComponent } from '@src/app/modules/courses/components/simulate/simulate.component';
 import { EditCoursesComponent } from '@src/app/modules/courses/components/edit/edit.component';
 import { AddCourseComponent } from '@src/app/modules/courses/components/add/add.component';
-import { ListCourseComponent } from './modules/courses/components/list/list';
+import { ListCourseComponent } from './modules/courses/components/list/list.component';
+import { HomeScreenComponent } from './core/home-screen/home-screen.component';
 
 export const pathRoutes = {
   homeScreen: '',

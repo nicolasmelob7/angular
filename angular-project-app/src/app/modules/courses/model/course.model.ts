@@ -1,9 +1,15 @@
+import { Days } from '@src/app/shared/constants/days/days.constant';
+
 export interface Course {
   id: string;
-  title: string;
-  description: string;
+  name: string;
   teacher: string;
-  date: Date | null;
+  description: string;
+  daysCourse: DaysCourse[];
+}
+
+export interface DaysCourse {
+  day: Days | null;
   startTime: Date | null;
   endTime: Date | null;
 }

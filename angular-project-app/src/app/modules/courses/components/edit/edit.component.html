@@ -6,14 +6,8 @@
   <section class="grid grid-cols-2 gap-4">
     <mat-form-field class="col-span-1">
       <mat-label>Title</mat-label>
-      <input matInput [formField]="courseForm.title" resetTouchedOnFocus />
-      <mat-error> {{ courseForm.title().errors()[0]?.message }} </mat-error>
-    </mat-form-field>
-
-    <mat-form-field class="col-span-1">
-      <mat-label>Teacher</mat-label>
-      <input matInput [formField]="courseForm.teacher" resetTouchedOnFocus />
-      <mat-error> {{ courseForm.teacher().errors()[0]?.message }} </mat-error>
+      <input matInput [formField]="courseForm.name" resetTouchedOnFocus />
+      <mat-error> {{ courseForm.name().errors()[0]?.message }} </mat-error>
     </mat-form-field>
 
     <mat-form-field class="col-span-2">
@@ -30,48 +24,88 @@
   </section>
 
   <h4>When will it happen?</h4>
-  <section class="grid grid-cols-2 gap-2">
-    <mat-form-field class="col-span-1">
-      <mat-label>Start</mat-label>
-      <input
-        matInput
-        [matTimepicker]="startTime"
-        [formField]="courseForm.startTime"
-        resetTouchedOnFocus
-      />
-      <mat-error> {{ courseForm.startTime().errors()[0]?.message }} </mat-error>
-      <mat-timepicker-toggle matIconSuffix [for]="startTime" />
-      <mat-timepicker #startTime />
-    </mat-form-field>
+  @for (dayCourse of courseForm.daysCourse; track $index; let isLast = $last) {
+    <section class="grid grid-cols-2 gap-4 days-course">
+      <mat-form-field class="col-span-1">
+        <mat-label>Day</mat-label>
 
-    <mat-form-field class="col-span-1">
-      <mat-label>End</mat-label>
-      <input
-        matInput
-        [matTimepicker]="endTime"
-        [matTimepickerMin]="courseForm.startTime().value()"
-        [formField]="courseForm.endTime"
-        resetTouchedOnFocus
-      />
-      <mat-error> {{ courseForm.endTime().errors()[0]?.message }} </mat-error>
-      <mat-timepicker-toggle matIconSuffix [for]="endTime" />
-      <mat-timepicker #endTime />
-    </mat-form-field>
+        <mat-select [formField]="dayCourse.day">
+          @for (day of DAYS; track $index) {
+            <mat-option
+              [value]="day.id"
+              [disabled]="
+                daysSelected().includes(day.id) &&
+                day.id != dayCourse.day().value()
+              "
+              >{{ day.day }}</mat-option
+            >
+          }
+        </mat-select>
+        <mat-error>
+          {{ dayCourse.day().errors()[0]?.message }}
+        </mat-error>
+      </mat-form-field>
 
-    <mat-form-field class="col-span-1">
-      <mat-label>Date</mat-label>
-      <input
-        matInput
-        [matDatepicker]="date"
-        [min]="minDate"
-        [formField]="courseForm.date"
-        resetTouchedOnFocus
-      />
-      <mat-error> {{ courseForm.date().errors()[0]?.message }} </mat-error>
-      <mat-datepicker-toggle matIconSuffix [for]="date"></mat-datepicker-toggle>
-      <mat-datepicker #date></mat-datepicker>
-    </mat-form-field>
-  </section>
+      <mat-form-field class="col-span-1 row-start-2">
+        <mat-label>Start</mat-label>
+        <input
+          matInput
+          [matTimepicker]="startTime"
+          [formField]="dayCourse.startTime"
+          resetTouchedOnFocus
+        />
+        <mat-error>
+          {{ dayCourse.startTime().errors()[0]?.message }}
+        </mat-error>
+        <mat-timepicker-toggle matIconSuffix [for]="startTime" />
+        <mat-timepicker #startTime />
+      </mat-form-field>
+
+      <mat-form-field class="col-span-1 row-start-2">
+        <mat-label>End</mat-label>
+        <input
+          matInput
+          [matTimepicker]="endTime"
+          [matTimepickerMin]="dayCourse.startTime().value()"
+          [formField]="dayCourse.endTime"
+          resetTouchedOnFocus
+        />
+        <mat-error> {{ dayCourse.endTime().errors()[0]?.message }} </mat-error>
+        <mat-timepicker-toggle matIconSuffix [for]="endTime" />
+        <mat-timepicker #endTime />
+      </mat-form-field>
+    </section>
+
+    @if (isLast) {
+      <div class="add-remove-day grid grid-cols-2">
+        <div>
+          <a (click)="addNewDayCourse()">
+            <mat-icon
+              aria-hidden="false"
+              aria-label="add new day"
+              matTooltip="add"
+              fontIcon="add"
+            ></mat-icon>
+            <span> new day </span>
+          </a>
+        </div>
+
+        @if (isLast && courseForm.daysCourse.length > 1) {
+          <div class="justify-end">
+            <a (click)="removeDayCourse()">
+              <mat-icon
+                aria-hidden="false"
+                aria-label="delete day"
+                matTooltip="delete"
+                fontIcon="clear"
+              ></mat-icon>
+              <span> remove day </span>
+            </a>
+          </div>
+        }
+      </div>
+    }
+  }
 
   <section class="grid grid-col-1">
     <button

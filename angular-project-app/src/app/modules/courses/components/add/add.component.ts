@@ -1,14 +1,6 @@
-import {
-  Component,
-  Directive,
-  HostBinding,
-  HostListener,
-  inject,
-  OnDestroy,
-  signal,
-} from '@angular/core';
+import { Component, computed, inject, OnDestroy, signal } from '@angular/core';
 import { CoursesService } from '../../service/courses.service';
-import { Course } from '../../model/course.model';
+import { Course, DaysCourse } from '../../model/course.model';
 import {
   form,
   submit,
@@ -24,8 +16,12 @@ import { validatorCourseForm } from '../../validator/form-add-edit.validator';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatTimepickerModule } from '@angular/material/timepicker';
+import { MatSelectModule } from '@angular/material/select';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { ResetTouchedOnFocusDirective } from '@src/app/shared/directives/reset-touched-on-focus/reset-touched-on-focus.directive';
+import { MatButtonModule } from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
+import { DAYS } from '@src/app/shared/constants/days/days.constant';
 
 @Component({
   selector: 'app-add-course',
@@ -39,6 +35,9 @@ import { ResetTouchedOnFocusDirective } from '@src/app/shared/directives/reset-t
     MatTimepickerModule,
     MatDatepickerModule,
     ResetTouchedOnFocusDirective,
+    MatSelectModule,
+    MatButtonModule,
+    MatIconModule,
   ],
   templateUrl: './add.component.html',
   styleUrl: './add.component.scss',
@@ -48,19 +47,30 @@ export class AddCourseComponent implements OnDestroy {
   private router = inject(Router);
   private ngUnsubscribe = new Subject<void>();
   readonly minDate = new Date();
+  readonly DAYS = DAYS;
 
   courseModel = signal<Course>({
     id: '',
-    title: '',
-    description: '',
+    name: '',
     teacher: '',
-    date: null,
-    startTime: null,
-    endTime: null,
+    description: '',
+    daysCourse: [
+      {
+        day: null,
+        startTime: null,
+        endTime: null,
+      },
+    ],
   });
 
   courseForm = form(this.courseModel, (schemaPath) =>
     validatorCourseForm(schemaPath),
+  );
+
+  daysSelected = computed(() =>
+    this.courseModel()
+      .daysCourse.filter((dayCourse) => dayCourse.day != null)
+      .map((dayCourse) => dayCourse.day),
   );
 
   onSubmit(event: Event) {
@@ -77,6 +87,30 @@ export class AddCourseComponent implements OnDestroy {
           },
         });
     });
+  }
+
+  addNewDayCourse() {
+    this.courseModel.update((oldCourse) => ({
+      ...oldCourse,
+      daysCourse: [
+        ...oldCourse.daysCourse,
+        {
+          day: null,
+          startTime: null,
+          endTime: null,
+        } as DaysCourse,
+      ],
+    }));
+  }
+
+  removeDayCourse() {
+    this.courseModel.update((oldCourse) => ({
+      ...oldCourse,
+      daysCourse: oldCourse.daysCourse.slice(
+        0,
+        oldCourse.daysCourse.length - 1,
+      ),
+    }));
   }
 
   ngOnDestroy() {

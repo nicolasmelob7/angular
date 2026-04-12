@@ -1,8 +1,17 @@
 import { inject, Injectable, signal } from '@angular/core';
-import { Course } from '../model/course.model';
+import { Course, DaysCourse } from '../model/course.model';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { catchError, map, Observable, throwError } from 'rxjs';
 import { Pagination } from '@src/app/shared/models/pagination/pagination.model';
+import { Days, DAYS_KEYS } from '@src/app/shared/constants/days/days.constant';
+
+interface DaysCourseList extends DaysCourse {
+  dayLabel: string;
+}
+
+export interface CourseList extends Course {
+  daysCourse: DaysCourseList[];
+}
 
 @Injectable({
   providedIn: 'root',
@@ -14,7 +23,7 @@ export class CoursesService {
     pageIndex: number = 0,
     pageSize: number = 5,
   ): Observable<{
-    courses: Course[];
+    courses: CourseList[];
     totalElements: number;
   }> {
     return this.httpClient
@@ -31,19 +40,23 @@ export class CoursesService {
       })
       .pipe(
         map((response) => ({
-          courses: response.data.courses,
+          courses: response.data.courses.map((course) => ({
+            ...course,
+            daysCourse: course.daysCourse.map((dayCourse) => ({
+              ...dayCourse,
+              dayLabel: dayCourse.day ? DAYS_KEYS[dayCourse.day] : '',
+            })),
+          })),
           totalElements: response.pagination.totalElements,
         })),
       );
   }
 
   addCourse(courseData: {
-    title: string;
+    name: string;
     teacher: string;
     description: string;
-    date: Date | null;
-    startTime: Date | null;
-    endTime: Date | null;
+    daysCourse: DaysCourse[];
   }) {
     return this.httpClient.post<{ course: Course }>(
       'http://localhost:3000/courses',
@@ -52,12 +65,10 @@ export class CoursesService {
   }
 
   update(courseData: {
-    title: string;
+    name: string;
     teacher: string;
     description: string;
-    date: Date | null;
-    startTime: Date | null;
-    endTime: Date | null;
+    daysCourse: DaysCourse[];
   }) {
     return this.httpClient.put<{ course: Course }>(
       'http://localhost:3000/courses',

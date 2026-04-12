@@ -1,7 +1,7 @@
 import { Component, inject, OnDestroy, OnInit } from '@angular/core';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatTableModule } from '@angular/material/table';
-import { CoursesService } from '../../service/courses.service';
+import { CourseList, CoursesService } from '../../service/courses.service';
 import { Course } from '../../model/course.model';
 import { Subject, takeUntil } from 'rxjs';
 import { CommonModule } from '@angular/common';
@@ -10,6 +10,7 @@ import { Router, RouterLink } from '@angular/router';
 import { MatIconModule } from '@angular/material/icon';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { CoursesProviderService } from '../../service/courses-provider.service';
+import { DAYS_KEYS } from '@src/app/shared/constants/days/days.constant';
 
 @Component({
   selector: 'app-list',
@@ -21,8 +22,8 @@ import { CoursesProviderService } from '../../service/courses-provider.service';
     MatIconModule,
     MatTooltipModule,
   ],
-  templateUrl: './list.html',
-  styleUrl: './list.scss',
+  templateUrl: './list.component.html',
+  styleUrl: './list.component.scss',
 })
 export class ListCourseComponent implements OnInit, OnDestroy {
   private courseService = inject(CoursesService);
@@ -30,16 +31,10 @@ export class ListCourseComponent implements OnInit, OnDestroy {
   private courseProviderService = inject(CoursesProviderService);
   private router = inject(Router);
   readonly pathRoutes = pathRoutes;
+  readonly DAYS_KEYS = DAYS_KEYS;
 
-  displayedColumns: string[] = [
-    'title',
-    'teacher',
-    'date',
-    'start',
-    'end',
-    'action',
-  ];
-  courses = new Array<Course>();
+  displayedColumns: string[] = ['name', 'teacher', 'date', 'action'];
+  courses = new Array<CourseList>();
   pageIndex = 0;
   pageSize = 5;
   totalElements = 1;

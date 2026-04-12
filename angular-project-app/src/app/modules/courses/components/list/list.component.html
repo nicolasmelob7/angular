@@ -1,0 +1,69 @@
+@if (showData && courses.length) {
+  <div class="title">
+    <p>Courses</p>
+  </div>
+  <div class="mat-elevation-z8">
+    <table mat-table [dataSource]="courses">
+      <ng-container matColumnDef="name">
+        <th mat-header-cell *matHeaderCellDef>Name</th>
+        <td mat-cell *matCellDef="let element">{{ element.name }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="teacher">
+        <th mat-header-cell *matHeaderCellDef>Teacher</th>
+        <td mat-cell *matCellDef="let element">{{ element.teacher }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="date">
+        <th mat-header-cell *matHeaderCellDef>Date/hour</th>
+        <td mat-cell *matCellDef="let element">
+          @for (dayCourse of element.daysCourse; track $index) {
+            <p>
+              {{ dayCourse.dayLabel }}:
+              {{ dayCourse.startTime | date: "shortTime" }} -
+              {{ dayCourse.endTime | date: "shortTime" }}
+            </p>
+          }
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="action">
+        <th mat-header-cell *matHeaderCellDef>Edit/delete</th>
+        <td mat-cell *matCellDef="let element">
+          <div class="action">
+            <a (click)="onEdit(element)">
+              <mat-icon
+                aria-hidden="false"
+                aria-label="edit"
+                matTooltip="Edit course"
+                fontIcon="create"
+              ></mat-icon>
+            </a>
+            <a (click)="onDelete(element)">
+              <mat-icon
+                aria-hidden="false"
+                aria-label="delete"
+                matTooltip="Delete course"
+                fontIcon="clear"
+              ></mat-icon>
+            </a>
+          </div>
+        </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+    </table>
+
+    <mat-paginator
+      [pageIndex]="pageIndex"
+      [pageSize]="pageSize"
+      [length]="totalElements"
+      [pageSizeOptions]="[5, 10, 15]"
+      (page)="onPaginate($event)"
+      showFirstLastButtons
+      aria-label="Select page"
+    >
+    </mat-paginator>
+  </div>
+}

@@ -1,9 +1,9 @@
 import { Component, signal } from '@angular/core';
-import { SidebarComponent } from '@src/app/core/home/sidebar/sidebar.component';
 import { CommonModule } from '@angular/common';
 import { RouterOutlet } from '@angular/router';
 import { LoadingComponent } from './shared/components/loading/loading.component';
 import { DialogMessage } from './shared/components/dialog-message/dialog-message';
+import { SidebarComponent } from './core/sidebar/sidebar.component';
 
 @Component({
   selector: 'app-root',
